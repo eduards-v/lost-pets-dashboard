@@ -3,6 +3,16 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Custom ignores
+
+project.json
+*.csproj
+Properties/
+Properties/*
+*.sln
+App.*
+
+
 # User-specific files
 *.suo
 *.user

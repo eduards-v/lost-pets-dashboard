@@ -1,4 +1,4 @@
-﻿using Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,43 +23,24 @@ namespace lost_pets_dashboard
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        Dog dog;
-        Cat cat;
 
         public MainPage()
         {
-            Dog = new Dog("German Shepherd", "Max", "Best friend");
-            Cat = new Cat( "Japanese Bobtail", "Murzik", "What is that tail?");
+           
 
             this.InitializeComponent();
         }
 
-        internal Dog Dog
-        {
-            get
-            {
-                return dog;
-            }
+    
 
-            set
-            {
-                dog = value;
-            }
+        private void HamburgerButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
 
-        internal Cat Cat
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
-            get
-            {
-                return cat;
-            }
-
-            set
-            {
-                cat = value;
-            }
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
-
-
     }
 }

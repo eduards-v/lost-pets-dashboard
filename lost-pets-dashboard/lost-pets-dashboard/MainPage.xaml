@@ -9,7 +9,8 @@
     xmlns:models = "using:Models">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        
+        <!--
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -32,14 +33,90 @@
                 <TextBlock Text="{x:Bind Dog.Details, Mode = OneWay}" Margin="5"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Background="Gray">
                 <TextBlock Text="{x:Bind Cat.Name, Mode = OneWay}" Margin="5"/>
                 <TextBlock Text="{x:Bind Cat.Breed, Mode = OneWay}" Margin="5"/>
                 <TextBlock Text="{x:Bind Cat.Details, Mode = OneWay}" Margin="5"/>
+                <Image Source="Images/omg_my_pet.png" Width="50" Height="50" Tapped=""/>
             </StackPanel>
 
 
         </Grid>
- 
+        -->
+
+        <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"
+                   CompactPaneLength="50" OpenPaneLength="150">
+            <SplitView.Pane>
+                <StackPanel Background="Gray">
+                    <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                </StackPanel>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <Grid Background="Black">
+                    <TextBlock Text="SplitView Basic" FontSize="30" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+
+        <!--<Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image Source="Images/pets_main_background.jpg" Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                    <Button Width="50" Height="50"  HorizontalAlignment="Center">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/omg_my_pet.png"/>
+                        </Button.Background>
+                    </Button>
+
+                    <TextBlock Text="Lost my pet" Grid.Column="1" Grid.Row="1"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+                    <Button Width="50" Height="50"  HorizontalAlignment="Center">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/omg_my_pet.png"/>
+                        </Button.Background>
+                    </Button>
+
+                    <TextBlock Text="Found a pet" Grid.Column="0" Grid.Row="1"/>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>-->
     </Grid>
 </Page>

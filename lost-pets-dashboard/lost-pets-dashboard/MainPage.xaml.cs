@@ -42,5 +42,42 @@ namespace lost_pets_dashboard
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
+
+        private void MenuButton1_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Content_Panel.Children.Contains(defaultContent))
+            {
+                Content_Panel.Children.Clear();
+                Content_Panel.Children.Add(defaultContent);// override object.Equals
+            }
+
+
+        }
+
+        private void MenuButton2_Click(object sender, RoutedEventArgs e)
+        {
+            //if (!Content_Panel.Children.Contains())
+            //{
+
+            //}
+            Content_Panel.Children.Clear();
+
+            Content_Panel.Children.Add(CreateContent(MenuButton2.Name));
+        }
+
+        private StackPanel CreateContent(string menu_opt)
+        {
+            StackPanel sp = new StackPanel();
+            sp.HorizontalAlignment = HorizontalAlignment.Center;
+            sp.VerticalAlignment = VerticalAlignment.Center;
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = string.Concat(menu_opt, " was selected!");
+            textBlock.FontSize = 30;
+            textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+
+            sp.Children.Add(textBlock);
+
+            return sp;
+        }
     }
 }

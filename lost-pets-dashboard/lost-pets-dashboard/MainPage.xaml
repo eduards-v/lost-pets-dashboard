@@ -53,12 +53,12 @@
 
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
-                    Width="50" Height="50" Background="Transparent"/>
-                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                    Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
+                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                        Width="50" Height="50" Background="Transparent"/>
+                        Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
                         <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -71,10 +71,13 @@
             </SplitView.Pane>
 
             <SplitView.Content>
-                <Grid Background="Black">
-                    <TextBlock Text="SplitView Basic" FontSize="30" Foreground="White"
+                <!--place sp inside grid if need additional content -->
+                <StackPanel x:Name="Content_Panel" Background="Black">
+
+                    
+                    <TextBlock x:Name="defaultContent" Text="SplitView Basic" FontSize="30" Foreground="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Grid>
+                </StackPanel>
             </SplitView.Content>
         </SplitView>
 

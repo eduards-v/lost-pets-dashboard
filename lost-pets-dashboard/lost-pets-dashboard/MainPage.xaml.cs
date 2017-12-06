@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,58 +29,44 @@ namespace lost_pets_dashboard
 
         public MainPage()
         {
-           
-
             this.InitializeComponent();
         }
 
     
-
-        private void HamburgerButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
+        // Menu expand event
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        private void MenuButton1_Click(object sender, RoutedEventArgs e)
+        // Menu Btn on
+    /*    private void MenuButton1_Click(object sender, RoutedEventArgs e)
         {
-            if (!Content_Panel.Children.Contains(defaultContent))
+                Content_Grid.Children.Clear();
+                Content_Grid.Children.Add(CreateContent(MenuButton1.Name));
+        } */
+
+        private async void MenuButton1_Click(object sender, RoutedEventArgs e)
+        {
+            CoreApplicationView newView = CoreApplication.CreateNewView();
+            int newViewId = 0;
+            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Content_Panel.Children.Clear();
-                Content_Panel.Children.Add(defaultContent);// override object.Equals
-            }
+                Frame frame = new Frame();
+                frame.Navigate(typeof(TestPage1), null);
+                Window.Current.Content = frame;
+                // You have to activate the window in order to show it later.
+                Window.Current.Activate();
 
-
+                newViewId = ApplicationView.GetForCurrentView().Id;
+            });
+            bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
         }
 
         private void MenuButton2_Click(object sender, RoutedEventArgs e)
         {
-            //if (!Content_Panel.Children.Contains())
-            //{
+            this.Frame.Navigate(typeof(TestPage2));
 
-            //}
-            Content_Panel.Children.Clear();
-
-            Content_Panel.Children.Add(CreateContent(MenuButton2.Name));
-        }
-
-        private StackPanel CreateContent(string menu_opt)
-        {
-            StackPanel sp = new StackPanel();
-            sp.HorizontalAlignment = HorizontalAlignment.Center;
-            sp.VerticalAlignment = VerticalAlignment.Center;
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = string.Concat(menu_opt, " was selected!");
-            textBlock.FontSize = 30;
-            textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
-
-            sp.Children.Add(textBlock);
-
-            return sp;
         }
     }
 }

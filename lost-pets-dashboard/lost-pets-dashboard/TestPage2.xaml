@@ -1,15 +1,13 @@
 ﻿<Page
-    x:Class="lost_pets_dashboard.MainPage"
+    x:Class="lost_pets_dashboard.TestPage2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:lost_pets_dashboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:vModels = "using:lost_pets_dashboard.ViewModels">
+    mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
         <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"
                    CompactPaneLength="50" OpenPaneLength="150">
             <SplitView.Pane>
@@ -37,15 +35,16 @@
             </SplitView.Pane>
 
             <SplitView.Content>
-                
+
                 <Grid x:Name="Content_Grid" Background="Black">
 
 
-                    <TextBlock x:Name="defaultContent" Text="Main Page" FontSize="30" Foreground="White"
+                    <TextBlock x:Name="defaultContent" Text="Test Page 2!" FontSize="30" Foreground="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
 
             </SplitView.Content>
         </SplitView>
+
     </Grid>
 </Page>

@@ -45,7 +45,7 @@ namespace lost_pets_dashboard
 
         private void MenuButton3_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(TestPage2))
+            this.Frame.Navigate(typeof(TestPage2));
         }
     }
 }

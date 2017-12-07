@@ -34,6 +34,14 @@ namespace lost_pets_dashboard.Models
             }
         }
 
+        public IList<DashPost> Container
+        {
+            get
+            {
+                return container;
+            }
+        }
+
         public void initializeContainer()
         {
             // make a request to get list items
@@ -64,5 +72,7 @@ namespace lost_pets_dashboard.Models
         {
             // make a request to update item
         }
+
+        
     }
 }

@@ -11,6 +11,7 @@ namespace lost_pets_dashboard.Models
         private string title;
         private string description;
 
+        public DashPost() { }
         public DashPost(string title, string description)
         {
             this.title = title;

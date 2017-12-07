@@ -8,10 +8,43 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name = "testBlock"  FontSize = "24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20"/>
-        <Button x:Name="testButton" Content="Test Button"
-                Margin="20"
-                HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Click="testButton_Click"/>
+        <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"
+                   CompactPaneLength="50" OpenPaneLength="150">
+            <SplitView.Pane>
+                <StackPanel Background="Gray">
+                    <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
+                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
+                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent" Click="MenuButton3_Click"/>
+                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                </StackPanel>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+
+                <Grid x:Name="Content_Grid" Background="Black">
+
+
+                    <TextBlock x:Name="defaultContent" Text="Test Page 2!" FontSize="30" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+            </SplitView.Content>
+        </SplitView>
+
     </Grid>
 </Page>

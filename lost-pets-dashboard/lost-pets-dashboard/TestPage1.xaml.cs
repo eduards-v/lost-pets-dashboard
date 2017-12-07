@@ -27,9 +27,25 @@ namespace lost_pets_dashboard
             this.InitializeComponent();
         }
 
-        private void testButton_Click(object sender, RoutedEventArgs e)
+        // Menu expand event
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
-            testBlock.Text = "Test Page One!";
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+        private void MenuButton1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void MenuButton2_Click(object sender, RoutedEventArgs e)
+        {
+            // leave empty, we are here 
+        }
+
+        private void MenuButton3_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(TestPage2))
         }
     }
 }

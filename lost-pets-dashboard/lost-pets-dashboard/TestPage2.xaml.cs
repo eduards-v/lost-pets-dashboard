@@ -40,8 +40,12 @@ namespace lost_pets_dashboard
 
         private void MenuButton2_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(TestPage1));
         }
 
+        private void MenuButton3_Click(object sender, RoutedEventArgs e)
+        {
+            // leave empty, we  are on this page
+        }
     }
 }

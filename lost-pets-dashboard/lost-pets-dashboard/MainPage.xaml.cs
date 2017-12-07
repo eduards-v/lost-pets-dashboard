@@ -46,8 +46,19 @@ namespace lost_pets_dashboard
                 Content_Grid.Children.Add(CreateContent(MenuButton1.Name));
         } */
 
-        private async void MenuButton1_Click(object sender, RoutedEventArgs e)
+        private void MenuButton1_Click(object sender, RoutedEventArgs e)
         {
+            this.Frame.Navigate(typeof(TestPage1));
+        }
+
+        private void MenuButton2_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(TestPage2));
+
+        }
+
+
+        /* private void Some_Element_Click(object sender, RoutedEventArgs e){
             CoreApplicationView newView = CoreApplication.CreateNewView();
             int newViewId = 0;
             await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -61,12 +72,9 @@ namespace lost_pets_dashboard
                 newViewId = ApplicationView.GetForCurrentView().Id;
             });
             bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
-        }
-
-        private void MenuButton2_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(TestPage2));
-
-        }
+         }
+         
+         
+         */
     }
 }

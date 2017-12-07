@@ -18,17 +18,17 @@
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
                     Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
-                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center"/>
+                        <TextBlock Text="Home" FontSize="18" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
-                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock Text="Lost pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton3_Click"/>
-                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock Text="Found pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
 
                 </StackPanel>

@@ -39,22 +39,20 @@ namespace lost_pets_dashboard
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        // Menu Btn on
-    /*    private void MenuButton1_Click(object sender, RoutedEventArgs e)
-        {
-                Content_Grid.Children.Clear();
-                Content_Grid.Children.Add(CreateContent(MenuButton1.Name));
-        } */
-
         private void MenuButton1_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(TestPage1));
+            // do nothing, we are on home page
         }
 
         private void MenuButton2_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(TestPage2));
+            this.Frame.Navigate(typeof(TestPage1));
 
+        }
+
+        private void MenuButton3_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(TestPage2));
         }
 
 

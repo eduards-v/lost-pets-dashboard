@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace lost_pets_dashboard.Models
 
         private Dashboard()
         {
+            Debug.WriteLine("Constructing INTERNAL container...");
             container = new List<DashPost>();
         }
 
@@ -25,6 +27,7 @@ namespace lost_pets_dashboard.Models
         {
             get
             {
+                Debug.WriteLine("GETTING INTERNAL container instance....");
                 if (instance == null)
                 {
                     instance = new Dashboard();
@@ -46,7 +49,7 @@ namespace lost_pets_dashboard.Models
         {
             // make a request to get list items
             // call this method at app start along with an 
-
+            Debug.WriteLine("Initializing INTERNAL container instance...");
             // doomy data for now
             container.Add(new DashPost ("Post 1", "About post" ));
             container.Add(new DashPost("Post 2", "About post"));

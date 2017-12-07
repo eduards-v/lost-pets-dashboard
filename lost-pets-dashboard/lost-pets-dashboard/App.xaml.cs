@@ -1,5 +1,8 @@
-﻿using System;
+﻿using lost_pets_dashboard.Models;
+using lost_pets_dashboard.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -30,7 +33,16 @@ namespace lost_pets_dashboard
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // Initializing Singletons
+            Debug.WriteLine("Initializing Singletons ....");
+            var dashboardInit = Dashboard.Instance;
+            dashboardInit.initializeContainer(); // load data
+            var dashboardVMInit = DashboardVM.Instance;
+            
         }
+
+         
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

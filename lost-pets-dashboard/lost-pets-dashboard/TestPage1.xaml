@@ -5,7 +5,8 @@
     xmlns:local="using:lost_pets_dashboard"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:viewModels="using:lost_pets_dashboard.ViewModels">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"
@@ -18,17 +19,17 @@
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
                     Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
-                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center"/>
+                        <TextBlock Text="Home" FontSize="18" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
-                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock Text="Lost Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton3_Click"/>
-                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock Text="Found Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
 
                 </StackPanel>
@@ -37,10 +38,51 @@
             <SplitView.Content>
 
                 <Grid x:Name="Content_Grid" Background="Black">
+                    <ScrollViewer>
+                        <!-- TodoCollection instance of VM is exposed through GETTER in C# code behind Page  -->
+                        <ListView x:Name ="dashboard" 
+                          ItemsSource="{x:Bind DashboardView.GetDashboard, Mode=OneWay }"
+                          SelectedIndex="{x:Bind DashboardView.SelectedIndex, Mode=TwoWay}"
+                          BorderBrush="White" BorderThickness="3"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollMode="Auto">
 
+                            <ListView.ItemTemplate>
+                                <!-- select datatype to point to VM of a task -->
+                                <DataTemplate x:DataType="viewModels:DashPostVM">
 
-                    <TextBlock x:Name="defaultContent" Text="Test Page 2!" FontSize="30" Foreground="White"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <StackPanel BorderBrush="Snow" BorderThickness="2" CornerRadius="10"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Background="#D5CDCD">
+                                        <!--  Bind individual parameteres from VM for a task -->
+                                        <TextBlock Text="{x:Bind Title, Mode=OneWay}"                                                    
+                                                    Margin="20,0,20, 8"
+                                                    FontSize="16"
+                                                    FontStyle="Oblique"
+                                                    FontWeight="Medium"
+                                                    Foreground="Black"/>
+                                        <TextBlock Text="{x:Bind Description, Mode=OneWay}" 
+                                                    Margin="20,0,20, 8"
+                                                    FontSize="16"
+                                                    FontStyle="Oblique"
+                                                    FontWeight="Medium"
+                                                    Foreground="#353535"/>
+<!--                                        <TextBlock Text="{x:Bind Location, Mode=OneWay}" 
+                                                        Margin="20,0,20, 8"
+                                                        FontSize="16"
+                                                        FontStyle="Oblique"
+                                                        FontWeight="Medium"
+                                                        Foreground="#353535"/>
+-->
+                                        <Line Margin="0,4" Stroke="Silver"
+                                        Stretch="Fill" X1="0" X2="1"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
                 </Grid>
 
             </SplitView.Content>

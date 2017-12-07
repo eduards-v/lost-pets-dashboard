@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lost_pets_dashboard.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,10 +23,29 @@ namespace lost_pets_dashboard
     /// </summary>
     public sealed partial class TestPage1 : Page
     {
+        //private DashboardVM dashboardView;
+
+        internal DashboardVM DashboardView
+        {
+            get
+            {
+                return DashboardVM.Instance;
+            }
+        }
+
         public TestPage1()
         {
             this.InitializeComponent();
+            this.Loaded += TestPage1_Loaded;
+
+            
         }
+
+        private void TestPage1_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
         // Menu expand event
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)

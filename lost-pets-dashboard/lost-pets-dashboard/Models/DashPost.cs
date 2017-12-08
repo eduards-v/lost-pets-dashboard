@@ -10,9 +10,10 @@ namespace lost_pets_dashboard.Models
     {
         private string title;
         private string description;
+        private bool isLost;
 
         public DashPost() { }
-        public DashPost(string title, string description)
+        public DashPost(string title, string description, bool isLost)
         {
             this.title = title;
             this.description = description;
@@ -43,7 +44,18 @@ namespace lost_pets_dashboard.Models
                 description = value;
             }
         }
+        
+        public bool IsLost
+        {
+            get
+            {
+                return isLost;
+            }
 
-
+            set
+            {
+                isLost = value;
+            }
+        }
     }
 }

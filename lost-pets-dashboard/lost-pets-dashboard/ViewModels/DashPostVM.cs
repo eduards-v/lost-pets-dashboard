@@ -21,5 +21,11 @@ namespace lost_pets_dashboard.ViewModels
             get { return This.Description; }
             set { SetProperty(This.Description, value, () => This.Description = value); }
         }
+
+        public bool IsLost
+        {
+            get { return This.IsLost; }
+            set { SetProperty(This.IsLost, value, () => This.IsLost = value); }
+        }
     }
 }

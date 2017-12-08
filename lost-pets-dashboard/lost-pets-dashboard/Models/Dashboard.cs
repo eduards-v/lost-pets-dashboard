@@ -45,17 +45,35 @@ namespace lost_pets_dashboard.Models
             }
         }
 
+        public IList<DashPost> GetContainer(string data_type)
+        {
+            if (data_type == "lost-pets")
+            {
+                // ask service to request lost pets payload
+                var lostPets = container.Where( p => p.IsLost == true);
+                return lostPets.ToList();
+            }else if (data_type == "found-pets")
+            {
+                // ask service to request found pets payload
+                var lostPets = container.Where(p => p.IsLost == false);
+                return lostPets.ToList();
+            }
+
+            return new List<DashPost>();
+        }
+
         public void initializeContainer()
         {
             // make a request to get list items
             // call this method at app start along with an 
             Debug.WriteLine("Initializing INTERNAL container instance...");
             // doomy data for now
-            container.Add(new DashPost ("Post 1", "About post" ));
-            container.Add(new DashPost("Post 2", "About post"));
-            container.Add(new DashPost("Post 3", "About post"));
-            container.Add(new DashPost("Post 4", "About post"));
-            container.Add(new DashPost("Post 5", "About post"));
+            container.Add(new DashPost ("Post 1", "About post", false ));
+            container.Add(new DashPost("Post 2", "About post", true));
+            container.Add(new DashPost("Post 3", "About post", true));
+            container.Add(new DashPost("Post 4", "About post", false));
+            container.Add(new DashPost("Post 5", "About post", true));
+            container.Add(new DashPost("Post 6", "About post", false));
 
         }
 

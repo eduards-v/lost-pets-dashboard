@@ -23,13 +23,15 @@ namespace lost_pets_dashboard
     /// </summary>
     public sealed partial class TestPage1 : Page
     {
-        //private DashboardVM dashboardView;
-
+        // Give a handle on Dashboard View Model. 
+        // This way encapsulating details of what data to get from service
+        // All the dashboard have to know is a caller class name to pick appropriate data
+        // Page has to know only the types to display (Types from ViewModels package)
         internal DashboardVM DashboardView
         {
             get
             {
-                return DashboardVM.Instance;
+                return DashboardVM.GetInstance(nameof(TestPage1));
             }
         }
 

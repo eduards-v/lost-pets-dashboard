@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lost_pets_dashboard.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,20 @@ namespace lost_pets_dashboard
     /// </summary>
     public sealed partial class TestPage2 : Page
     {
+
+        // Give a handle on Dashboard View Model. 
+        // This way encapsulating details of what data to get from service
+        // All the dashboard have to know is a caller class name to pick appropriate data
+        // Page has to know only the types to display (Types from ViewModels package)
+        internal DashboardVM DashboardView
+        {
+            get
+            {
+                // Get singleton instance and pass it a class name as string
+                return DashboardVM.GetInstance(nameof(TestPage2));
+            }
+        }
+
         public TestPage2()
         {
             this.InitializeComponent();

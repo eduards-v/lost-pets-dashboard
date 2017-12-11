@@ -1,12 +1,15 @@
-﻿using lost_pets_dashboard.Models;
+﻿using lost_pets_dashboard.CloudServices;
+using lost_pets_dashboard.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Data;
 
 namespace lost_pets_dashboard.ViewModels
 {
@@ -15,24 +18,27 @@ namespace lost_pets_dashboard.ViewModels
     class DashboardVM : NotificationBase
     {
         private static DashboardVM instance;
-        // Actual dashposts container
-        private Dashboard dashboard;
+
         // Observable collection to source up the xaml view
         private ObservableCollection<DashPostVM> _dashboard;
-         
+        private CloudRequests<DashPost> cloud_service;
+
         // Observable collection selected index. Keeping track of selections from UI
         private int selectedIndex;
 
         // Constructor
         private DashboardVM() {
             Debug.WriteLine("Constructing EXTERNAL container....");
-            dashboard = Dashboard.Instance; // get instance of a container
+
+            cloud_service = new CloudProxy();
+
+            _dashboard = new ObservableCollection<DashPostVM>();
 
             // set selectoedIndex to be negative, avoiding pointing to an empty index in case collection is empty
             SelectedIndex = -1;
 
         }
-        // Class instance getter
+        // Class instance getter. Used for accessing public methods to cooperate with ListView.
         public static DashboardVM Instance
         {
             get {
@@ -46,30 +52,16 @@ namespace lost_pets_dashboard.ViewModels
             }
         }
 
+        // Called from a xaml.cs Page to initialize ListView. Name of the caller class is passed as a 
+        // parameter to determine what data to return.
         public static DashboardVM GetInstance([CallerMemberName] string callerName = null)
         {
             Debug.WriteLine("GETTING EXTERNAL container instance...." + " Called by " + callerName);
 
-            /* 
-               if callerName is LostPetsPage then set _dashboard content to be lost pets items 
-               if callerName is FoundPetsPage then set _dashboard content to be found pets items
+            // Calling private method inside static method via class reference. 
+            Instance.initDashboard(callerName);
 
-                boolean isLost is used to identify which item belong to lost/found view
-                use it searching criteria for back-end API 
-
-               
-               display by locations requires to get current location and send request to API to specify location
-               to return list of lost/found pets inside location, then populate _dashboard with new list
-
-                this way you also no need to get full list of items from API, but only a slice of it
-            */
-            if (instance == null)
-            {
-                instance = new DashboardVM();
-            }
-
-            // calling non-static method from static via class reference. This will work with singleton calling it's own private methods.
-            DashboardVM.Instance.initDashboard(callerName);
+            Debug.WriteLine("AFTER INIT DASHBOARD ....");
             return instance;
         }
         public int SelectedIndex
@@ -87,7 +79,7 @@ namespace lost_pets_dashboard.ViewModels
             get { return (selectedIndex >= 0) ? _dashboard[selectedIndex] : null; }
         }
 
-        public ObservableCollection<DashPostVM> GetDashboard
+        public ObservableCollection<DashPostVM> VMDashboard
         {
             get
             {
@@ -96,43 +88,46 @@ namespace lost_pets_dashboard.ViewModels
             }
         }
 
+        // Method to initialize dashboard for current page
+        // Everytime an application navigates to a Page with ListView,
+        // a new request sent to the service to obtain items. Consistency 
+        // with database on cloud also kept in synch.
         private void initDashboard(string dashboardType)
         {
-            if (_dashboard == null)
-            {
-                _dashboard = new ObservableCollection<DashPostVM>();
-            }
-
             // clear existing items on _dashboard
-            
+            _dashboard.Clear();
 
-            /*
-                Call inner dashboard container to get list of Lost/Found items
-                Use dashboardType to decide what method to call from dashboard container
-            */
-
-            if (dashboardType == "TestPage1")
+            switch (dashboardType)
             {
-                // initialize observable list with values from a container
-                foreach (var item in dashboard.GetContainer("lost-pets"))
-                {
+                case "TestPage1":
+                    Debug.WriteLine("Loading for TestPage1");
 
-                    _dashboard.Add(new DashPostVM(item));
-                }
-                // call GetLostPets
-                // iterate over returned items list and add each item into _dashboard
-            }
-            else if (dashboardType == "TestPage2") {
+                    // initialize observable list with values from a request
+                    foreach (var item in cloud_service.requestList(DashboardType.LOST))
+                    {
+                        var newPost = new DashPostVM(item);
+                        _dashboard.Add(newPost);
+                    }
+                    break; // end of case TestPage1
 
-                // initialize observable list with values from a container
-                foreach (var item in dashboard.GetContainer("found-pets"))
-                {
+                case "TestPage2":
+                    Debug.WriteLine("Loading for TestPage2");
+                    // initialize observable list with values from a container
+                    foreach (var item in cloud_service.requestList(DashboardType.FOUND))
+                    {
+                        var newPost = new DashPostVM(item);
+                        _dashboard.Add(new DashPostVM(newPost));
 
-                    _dashboard.Add(new DashPostVM(item));
-                }
-                // call GetFoundPets
-                // iterate over returned items list and add each item into _dashboard
-            }
+                    }
+                    break; // end of case TestPage2
+            } // end of cases
+        } // end of initDashboard()
+
+
+        public void AddItem()
+        {
+            _dashboard.Add(new DashPostVM(new DashPost("ADD ITEM", "Testing add item")));
         }
+
     }
 }

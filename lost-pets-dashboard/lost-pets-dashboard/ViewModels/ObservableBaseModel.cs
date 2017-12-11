@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -32,6 +33,7 @@ namespace lost_pets_dashboard.ViewModels
         {
             if (PropertyChanged != null)
             {
+                Debug.WriteLine("RaisePropertyChanged" + property);
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }

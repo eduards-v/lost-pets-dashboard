@@ -35,9 +35,7 @@ namespace lost_pets_dashboard
             this.Suspending += OnSuspending;
 
             // Initializing Singletons
-            Debug.WriteLine("Initializing Singletons ....");
-            var dashboardInit = Dashboard.Instance;
-            dashboardInit.initializeContainer(); // load data
+            Debug.WriteLine("Initializing Singleton ....");
             var dashboardVMInit = DashboardVM.Instance;
             
         }

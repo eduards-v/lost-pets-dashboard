@@ -46,7 +46,7 @@
                     <ScrollViewer>
                         <!-- TodoCollection instance of VM is exposed through GETTER in C# code behind Page  -->
                         <ListView x:Name ="dashboard" 
-                          ItemsSource="{x:Bind DashboardView.GetDashboard, Mode=OneWay }"
+                          ItemsSource="{x:Bind InitDashboardView.VMDashboard, Mode=OneWay }"
                           SelectedIndex="{x:Bind DashboardView.SelectedIndex, Mode=TwoWay}"
                           BorderBrush="White" BorderThickness="3"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"

@@ -32,6 +32,12 @@
                         <TextBlock Text="Found Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton4" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent" Click="{x:Bind DashboardView.AddItem}"/>
+                        <TextBlock Text="Found Pets" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+
                 </StackPanel>
             </SplitView.Pane>
 
@@ -41,7 +47,7 @@
                     <ScrollViewer>
                         <!-- TodoCollection instance of VM is exposed through GETTER in C# code behind Page  -->
                         <ListView x:Name ="dashboard" 
-                          ItemsSource="{x:Bind DashboardView.GetDashboard, Mode=OneWay }"
+                          ItemsSource="{x:Bind InitDashboardView.VMDashboard, Mode=OneWay }"
                           SelectedIndex="{x:Bind DashboardView.SelectedIndex, Mode=TwoWay}"
                           BorderBrush="White" BorderThickness="3"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"

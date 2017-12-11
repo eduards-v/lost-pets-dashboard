@@ -1,6 +1,7 @@
 ﻿using lost_pets_dashboard.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,29 +24,35 @@ namespace lost_pets_dashboard
     /// </summary>
     public sealed partial class TestPage1 : Page
     {
+
+
         // Give a handle on Dashboard View Model. 
         // This way encapsulating details of what data to get from service
         // All the dashboard have to know is a caller class name to pick appropriate data
         // Page has to know only the types to display (Types from ViewModels package)
-        internal DashboardVM DashboardView
+        //private DashboardVM dashboardVM;
+
+        private DashboardVM InitDashboardView
         {
             get
             {
+                Debug.WriteLine("GETTING Dashboard BEHIND XAML....");
                 return DashboardVM.GetInstance(nameof(TestPage1));
+            }
+        }
+
+        private DashboardVM DashboardView
+        {
+            get
+            {
+                return DashboardVM.Instance;
             }
         }
 
         public TestPage1()
         {
             this.InitializeComponent();
-            this.Loaded += TestPage1_Loaded;
-
             
-        }
-
-        private void TestPage1_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
 
 

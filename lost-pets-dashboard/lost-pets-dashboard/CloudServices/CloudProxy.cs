@@ -16,9 +16,9 @@ namespace lost_pets_dashboard.CloudServices
         {
             cs = new CloudService();
         }
-        public List<DashPost> requestList(DashboardType type)
+        public async Task<List<DashPost>> requestList(DashboardType type)
         {
-            return cs.requestList(type);
+            return await cs.requestList(type);
         }
     }
 }

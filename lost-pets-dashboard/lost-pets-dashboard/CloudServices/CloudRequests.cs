@@ -8,6 +8,6 @@ namespace lost_pets_dashboard.CloudServices
 {
     interface CloudRequests<T>
     {
-        List<T> requestList(DashboardType type);
+        Task<List<T>> requestList(DashboardType type);
     }
 } 

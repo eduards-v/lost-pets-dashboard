@@ -92,7 +92,7 @@ namespace lost_pets_dashboard.ViewModels
         // Everytime an application navigates to a Page with ListView,
         // a new request sent to the service to obtain items. Consistency 
         // with database on cloud also kept in synch.
-        private void initDashboard(string dashboardType)
+        private async void initDashboard(string dashboardType)
         {
             // clear existing items on _dashboard
             _dashboard.Clear();
@@ -102,8 +102,9 @@ namespace lost_pets_dashboard.ViewModels
                 case "TestPage1":
                     Debug.WriteLine("Loading for TestPage1");
 
+                    var tempLost = await Task.Run(() => cloud_service.requestList(DashboardType.LOST).Result);
                     // initialize observable list with values from a request
-                    foreach (var item in cloud_service.requestList(DashboardType.LOST))
+                    foreach (var item in tempLost)
                     {
                         var newPost = new DashPostVM(item);
                         _dashboard.Add(newPost);
@@ -112,12 +113,13 @@ namespace lost_pets_dashboard.ViewModels
 
                 case "TestPage2":
                     Debug.WriteLine("Loading for TestPage2");
+
+                    var tempFound = await Task.Run(() => cloud_service.requestList(DashboardType.FOUND).Result);
                     // initialize observable list with values from a container
-                    foreach (var item in cloud_service.requestList(DashboardType.FOUND))
+                    foreach (var item in tempFound)
                     {
                         var newPost = new DashPostVM(item);
                         _dashboard.Add(new DashPostVM(newPost));
-
                     }
                     break; // end of case TestPage2
             } // end of cases

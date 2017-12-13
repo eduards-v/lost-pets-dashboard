@@ -45,7 +45,7 @@ namespace lost_pets_dashboard
         {
             get
             {
-                return DashboardVM.Instance;
+                return DashboardVM.Instance(nameof(TestPage1));
             }
         }
 

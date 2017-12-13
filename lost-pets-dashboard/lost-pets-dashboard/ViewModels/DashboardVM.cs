@@ -17,14 +17,17 @@ namespace lost_pets_dashboard.ViewModels
     // Also a singleton
     class DashboardVM : NotificationBase
     {
-        private static DashboardVM instance;
+        private static DashboardVM instance = new DashboardVM();
 
         // Observable collection to source up the xaml view
         private ObservableCollection<DashPostVM> _dashboard;
-        private CloudRequests<DashPost> cloud_service;
+        private CloudRequests<Dashpost> cloud_service;
 
         // Observable collection selected index. Keeping track of selections from UI
         private int selectedIndex;
+
+        // to keep a track of active pages
+        private string currPage = "";
 
         // Constructor
         private DashboardVM() {
@@ -39,17 +42,12 @@ namespace lost_pets_dashboard.ViewModels
 
         }
         // Class instance getter. Used for accessing public methods to cooperate with ListView.
-        public static DashboardVM Instance
+        public static DashboardVM Instance([CallerMemberName] string callerName = null)
         {
-            get {
-                Debug.WriteLine("GETTING EXTERNAL container instance....");
-                if (instance == null)
-                {
-                    instance = new DashboardVM();
-                    return instance;
-                }
-                return instance;
-            }
+            Debug.WriteLine("GETTING EXTERNAL container instance....");
+            instance.currPage = callerName;
+            return instance;
+            
         }
 
         // Called from a xaml.cs Page to initialize ListView. Name of the caller class is passed as a 
@@ -59,11 +57,12 @@ namespace lost_pets_dashboard.ViewModels
             Debug.WriteLine("GETTING EXTERNAL container instance...." + " Called by " + callerName);
 
             // Calling private method inside static method via class reference. 
-            Instance.initDashboard(callerName);
+            instance.initDashboard(callerName);
 
             Debug.WriteLine("AFTER INIT DASHBOARD ....");
             return instance;
         }
+
         public int SelectedIndex
         {
             get { Debug.WriteLine("SELECTED INDEX CHANGED - TodoCollectionVM :: " + selectedIndex); return selectedIndex; }
@@ -102,7 +101,7 @@ namespace lost_pets_dashboard.ViewModels
                 case "TestPage1":
                     Debug.WriteLine("Loading for TestPage1");
 
-                    var tempLost = await Task.Run(() => cloud_service.requestList(DashboardType.LOST).Result);
+                    var tempLost = await Task.Run(() => cloud_service.RequestList(DashboardType.LOST).Result);
                     // initialize observable list with values from a request
                     foreach (var item in tempLost)
                     {
@@ -114,7 +113,7 @@ namespace lost_pets_dashboard.ViewModels
                 case "TestPage2":
                     Debug.WriteLine("Loading for TestPage2");
 
-                    var tempFound = await Task.Run(() => cloud_service.requestList(DashboardType.FOUND).Result);
+                    var tempFound = await Task.Run(() => cloud_service.RequestList(DashboardType.FOUND).Result);
                     // initialize observable list with values from a container
                     foreach (var item in tempFound)
                     {
@@ -128,7 +127,17 @@ namespace lost_pets_dashboard.ViewModels
 
         public void AddItem()
         {
-            _dashboard.Add(new DashPostVM(new DashPost("ADD ITEM", "Testing add item")));
+            Debug.WriteLine("Adding new item");
+            // request service to add new dashpost
+            if (currPage.Equals("TestPage1"))
+            {
+                cloud_service.AddFeed(DashboardType.LOST, new Dashpost("Add Lost Item","Testing new lost item"));
+            } else if (currPage.Equals("TestPage2"))
+            {
+                cloud_service.AddFeed(DashboardType.FOUND, new Dashpost("Add Found Item", "Testing new found item"));
+            }
+
+            //_dashboard.Add(new DashPostVM(new DashPost("ADD ITEM", "Testing add item")));
         }
 
     }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace lost_pets_dashboard.ViewModels
 {
-    class DashPostVM : NotificationBase<DashPost>
+    class DashPostVM : NotificationBase<Dashpost>
     {
-        public DashPostVM(DashPost dashPost = null) : base(dashPost) { }
+        public DashPostVM(Dashpost dashPost = null) : base(dashPost) { }
 
         public String Title
         {

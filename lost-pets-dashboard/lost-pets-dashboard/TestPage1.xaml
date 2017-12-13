@@ -17,23 +17,27 @@
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
                     Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
                         <TextBlock Text="Home" FontSize="18" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE7BC;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
                         <TextBlock Text="Lost Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE7BC;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton3_Click"/>
                         <TextBlock Text="Found Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
-
+                    <StackPanel>
+                        <Line Margin="0,4" Stroke="Silver" Stretch="Fill" X1="0" X2="1"/>
+                        <TextBlock Text="Commands" FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Line Margin="0,4" Stroke="Silver" Stretch="Fill" X1="0" X2="1"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton4" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        <Button x:Name="MenuButton4" FontFamily="Segoe MDL2 Assets" Content="&#xE710;"
                         Width="50" Height="50" Background="Transparent" Click="{x:Bind DashboardView.AddItem}"/>
                         <TextBlock Text="Found Pets" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>

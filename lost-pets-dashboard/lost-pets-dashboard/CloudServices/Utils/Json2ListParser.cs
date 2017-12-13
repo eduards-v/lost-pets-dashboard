@@ -11,14 +11,14 @@ namespace lost_pets_dashboard.CloudServices.Utils
     class Json2ListParser
     {
         // REF.: https://github.com/arkiq/AppDataBind/blob/master/App9databind2/MainPage.xaml.cs
-        public List<DashPost> parseJArray2List(JsonArray tempJson)
+        public List<Dashpost> parseJArray2List(JsonArray tempJson)
         {
-            List<DashPost> tempList = new List<DashPost>();
+            List<Dashpost> tempList = new List<Dashpost>();
             foreach (var item in tempJson)
             {
                 var obj = item.GetObject();
 
-                DashPost dashPost = new DashPost();
+                Dashpost dashPost = new Dashpost();
 
                 foreach (var key in obj.Keys)
                 {

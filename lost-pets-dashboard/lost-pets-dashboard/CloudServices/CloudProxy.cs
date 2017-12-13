@@ -7,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace lost_pets_dashboard.CloudServices
 {
-    class CloudProxy : CloudRequests<DashPost>
+    class CloudProxy : CloudRequests<Dashpost>
     {
 
-        private CloudRequests<DashPost> cs;
+        private CloudRequests<Dashpost> cs;
 
         public CloudProxy()
         {
             cs = new CloudService();
         }
-        public async Task<List<DashPost>> requestList(DashboardType type)
+
+        public async Task<List<Dashpost>> RequestList(DashboardType type)
         {
-            return await cs.requestList(type);
+            return await cs.RequestList(type);
+        }
+
+        public void AddFeed(DashboardType type, Dashpost post)
+        {
+            cs.AddFeed(type, post);
         }
     }
 }

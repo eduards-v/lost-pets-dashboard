@@ -36,7 +36,7 @@ namespace lost_pets_dashboard
 
             // Initializing Singletons
             Debug.WriteLine("Initializing Singleton ....");
-            var dashboardVMInit = DashboardVM.Instance;
+            var dashboardVMInit = DashboardVM.Instance(nameof(TestPage1));
             
         }
 

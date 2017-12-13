@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace lost_pets_dashboard.Models
 {
-    class DashPost
+    class Dashpost
     {
         private string title;
         private string description;
 
 
-        public DashPost() { }
-        public DashPost(string title, string description)
+        public Dashpost() { }
+        public Dashpost(string title, string description)
         {
             this.title = title;
             this.description = description;

@@ -22,9 +22,9 @@ namespace lost_pets_dashboard.CloudServices
             return await cs.RequestList(type);
         }
 
-        public void AddFeed(DashboardType type, Dashpost post)
+        public async Task<bool> AddFeed(DashboardType type, Dashpost post)
         {
-            cs.AddFeed(type, post);
+            return await cs.AddFeed(type, post);
         }
     }
 }

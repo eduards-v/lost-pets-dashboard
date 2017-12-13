@@ -51,8 +51,9 @@ namespace lost_pets_dashboard.CloudServices
         }
 
 
-        public async void AddFeed(DashboardType type, Dashpost post)
+        public async Task<bool> AddFeed(DashboardType type, Dashpost post)
         {
+            bool statusFlag = false;
             Uri requestUri =  new Uri("http://localhost:8080/dashboards/add/lost/");
             if (type.Equals(DashboardType.FOUND)) requestUri = new Uri("http://localhost:8080/dashboards/add/found/");
 
@@ -70,6 +71,8 @@ namespace lost_pets_dashboard.CloudServices
                 string responJsonText = await respon.Content.ReadAsStringAsync();
 
                 Debug.WriteLine("Adding new item respone: " + responJsonText);
+                statusFlag = true;
+
             }
             catch (HttpRequestException exception)
             {
@@ -77,6 +80,7 @@ namespace lost_pets_dashboard.CloudServices
                 Debug.WriteLine("DESCRIPTION: " + exception.Message + " STATUS CODE: " + exception.HResult);
             }
 
+            return statusFlag;
         }
     }
 }

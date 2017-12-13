@@ -10,6 +10,6 @@ namespace lost_pets_dashboard.CloudServices
     interface CloudRequests<T>
     {
         Task<List<T>> RequestList(DashboardType type);
-        void AddFeed(DashboardType type, Dashpost post);
+        Task<bool> AddFeed(DashboardType type, Dashpost post);
     }
 } 

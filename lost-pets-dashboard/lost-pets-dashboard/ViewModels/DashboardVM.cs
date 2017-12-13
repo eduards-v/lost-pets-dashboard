@@ -9,6 +9,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
 namespace lost_pets_dashboard.ViewModels
@@ -125,19 +127,66 @@ namespace lost_pets_dashboard.ViewModels
         } // end of initDashboard()
 
 
-        public void AddItem()
+        public async void AddItem()
         {
+            bool status = false;
             Debug.WriteLine("Adding new item");
             // request service to add new dashpost
             if (currPage.Equals("TestPage1"))
             {
-                cloud_service.AddFeed(DashboardType.LOST, new Dashpost("Add Lost Item","Testing new lost item"));
+                var lost = await NewDashpostDialog("New Lost Pet Dashpost");
+                if (lost != null)
+                {
+                    status = await cloud_service.AddFeed(DashboardType.LOST, lost);
+                }
+                
+                
             } else if (currPage.Equals("TestPage2"))
             {
-                cloud_service.AddFeed(DashboardType.FOUND, new Dashpost("Add Found Item", "Testing new found item"));
+                var found = await NewDashpostDialog("New Lost Pet Dashpost");
+                if (found != null)
+                {
+                    status = await cloud_service.AddFeed(DashboardType.FOUND, found);
+                }
+                
             }
 
-            //_dashboard.Add(new DashPostVM(new DashPost("ADD ITEM", "Testing add item")));
+            // re-init dashboard after new item added
+            if(status) initDashboard(currPage);
+
+        }
+
+        private async Task<Dashpost> NewDashpostDialog(string title)
+        {
+            ContentDialog dial = new DashboardAddForm();
+            var titl = (TextBox) GetChildren((Grid)dial.Content, 0, 1);
+            var desc = (TextBox) GetChildren((Grid)dial.Content, 1, 1);
+
+            if (await dial.ShowAsync() == ContentDialogResult.Primary)
+            {
+                var dashpost = new Dashpost();
+                
+                dashpost.Title = titl.Text;
+                dashpost.Description = desc.Text;
+
+                return dashpost;
+            }
+
+            return null;
+        }
+
+        private UIElement GetChildren(Grid grid, int row, int column)
+        {
+            foreach (UIElement child in grid.Children)
+            {
+                if (Convert.ToInt32(child.GetValue(Grid.RowProperty)) == row
+                      &&
+                   Convert.ToInt32(child.GetValue(Grid.ColumnProperty)) == column)
+                {
+                    return child;
+                }
+            }
+            return null;
         }
 
     }
